@@ -97,15 +97,15 @@ public class ChangeMachine {
 				System.out.print("$0.01: " + pennies + "    ");
 				
 				//start new line before restarting loop
-				System.out.print("\n");
+				System.out.print("\n\n");
 			} else {
 				//payment = price+tax
-				System.out.println("Exact Change! Amazing!");
+				System.out.println("Exact Change! Amazing!\n");
 			}
 		}
 		
 		input.close();
-		System.out.println("Done.");
+		System.out.println("\nDone.");
 	}
 
 }
