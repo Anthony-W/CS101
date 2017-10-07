@@ -18,7 +18,7 @@ public class Main
 		{
 			switch(digits[i])
 			{
-				//zerp
+				//zero
 				case '0':
 					zeros++;
 					break;
