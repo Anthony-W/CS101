@@ -60,13 +60,16 @@ public class GameController
 		if (player1.currentTotal() > player2.currentTotal())
 			System.out.println("\nPlayer 1 wins!");
 		else if (player1.currentTotal() < player2.currentTotal())
-			System.out.println("\nPlayer 2 wins");
+			System.out.println("\nPlayer 2 wins!");
 		else
 			System.out.println("\nThe result is a tie.");
 		
+		//print out final scores
+		System.out.println("\nPlayer 1: " + player1.currentTotal() + " -- Player 2: " + player2.currentTotal());
+		
 		//new game?
-		System.out.println("would you like to play again? Respond (Y/N) only.");
-		if (scanner.nextLine().substring(0,1).toUpperCase().equals("Y"))
+		System.out.println("\nwould you like to play again? Respond (Y/N) only.");
+		if (yesResponse(scanner))
 			play();
 		else
 			System.out.println("Goodbye");
@@ -132,6 +135,6 @@ public class GameController
 	public boolean yesResponse(Scanner kb)
 	{
 		String answer = kb.nextLine();
-		return answer.substring(0, 1).toUpperCase().equals(_YES); //TODO: This code is causing an exception
+		return answer.substring(0, 1).toUpperCase().equals(_YES);
 	}
 }
