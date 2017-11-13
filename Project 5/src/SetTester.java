@@ -109,7 +109,7 @@ public class SetTester
         {
             args[i] = "";
         }
-/*
+
         args[0] = "1";
         args[1] = "2";
         args[2] = "3";
@@ -129,7 +129,7 @@ public class SetTester
         args[16] = "17";
         args[17] = "18";
         args[18] = "19";
-*/
+
         ArrayList tests = parseCommandLine(args);
         boolean[] TestResults = new boolean[MAX_NUM_TESTS];
 
