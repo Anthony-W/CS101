@@ -26,10 +26,15 @@ public class Savings extends Account
 	
 	public void withdraw(double amt) throws InsufficientFundsException
 	{
+		//TODO: Problem with stack overflow
 		super.withdraw(amt);
-		if (_balance < MIN_AMOUNT) {
+		if (_balance < MIN_AMOUNT)
+		{
 			if (_link == null) throw new InsufficientFundsException("Below minimum, no linked account");
-			_link._balance -= (MIN_AMOUNT - _balance);
+			if (_link._balance < MIN_AMOUNT - _balance) throw new InsufficientFundsException("Below minimum, not enough money in linked account");
+			
+			//_link.withdraw(MIN_AMOUNT - _balance);
+			_link._balance -= MIN_AMOUNT - _balance;
 			_balance = MIN_AMOUNT;
 		}
 	}

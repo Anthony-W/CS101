@@ -22,7 +22,7 @@ public class Account
     //
     
     public Account() {
-    	this("NO NAME");
+    	this("");
     }
     
     public Account(String name) {
@@ -69,21 +69,20 @@ public class Account
     // 
     public void withdraw(double amt) throws InsufficientFundsException
     {
-    	if (_balance > amt) {
+    	if (_balance > amt)
+    	{
     		_balance -= amt;
     	}
     	else
     	{
     		if (_link == null) throw new InsufficientFundsException("Overdraft with no linked account");
-    		
-    		if (_balance + _link._balance > amt)
-	    	{
-	    		amt -= _balance;
-	    		_balance = 0;
-	    		_link.withdraw(amt);
-	    	} else {
-	    		throw new InsufficientFundsException("Not enough funds in accounts");
-	    	}
+    		if (_balance + (_link._balance - _link.getMinimum()) < amt) throw new InsufficientFundsException("Not enough funds in accounts");
+	    	
+    		amt -= _balance;
+    		_balance = 0;
+    		_link.withdraw(amt);
+    		//_link._balance -= amt;
+	    	
     	}
     }
     

@@ -20,6 +20,22 @@ public class CappedChecking extends Checking
 	{
 		super(name);
 	}
+    
+    public void deposit(double amt) throws LinkAccountException
+    {
+    	if (_balance + amt < MAX_AMOUNT)
+    	{
+    		_balance += amt;
+    	}
+    	else
+    	{
+    		if (_link == null) throw new LinkAccountException("Overflowed, no linked account");
+    		
+    		amt -= (MAX_AMOUNT - _balance);
+    		_link.deposit(amt);
+    	}
+    	
+    }
 
 	@Override
     public boolean equals(Object obj)
