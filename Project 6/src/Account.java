@@ -1,28 +1,36 @@
 /*
-* @author (Student Name)
-* <p> (File Name)
-* <p> (Assignment)
-* <p> (Describe, in general, the code contained.)
+* @author Anthony Wessel
+* <p> Account.java
+* <p> Project 6
+* <p> implements the methods and variables used by every account
 */
 public class Account implements Filterable
 {
+	//current balance of this account
     protected double _balance;
     public double getBalance() { return _balance; }
     
+    //name of this account
     protected String _name;
     public String getName() { return _name; }
     
+    //account linked to this one
     protected Account _link;
     public Account getLink() { return _link; }
 
-	//
-    // TODO: Constructors and other required methods.
-    //
-    
+
+    /*
+     * default constructor
+     */
     public Account() {
     	this("");
     }
     
+    
+    /*
+     * overloaded constructor
+     * takes the name of the account as a parameter
+     */
     public Account(String name) {
     	_name = name;
     	_balance = 0;
@@ -30,13 +38,14 @@ public class Account implements Filterable
     }
     
     
-    //
-    // Link this account with the given account;
-    //  Cannot link accounts if this equals linkAcct
-    //  Otherwise:
-    //     Unlink this account, if it is linked
-    //     Link the new accounts in BOTH directions
-    //
+    
+    
+    /*
+     * links this  account to another account, and vice versa
+     * 
+     * @param linkAcct		account to link to
+     * @return whether or not the new link was established
+     */
     public boolean link(Account linkAcct)
     {
     	if (linkAcct == null) return false;
@@ -49,22 +58,22 @@ public class Account implements Filterable
     }
     
     
+    /*
+     * adds money to this account
+     * 
+     * @param amt 	amount to be deposited
+     */
     public void deposit(double amt) throws LinkAccountException
     {
     	_balance += amt;
     }
     
 
-    //
-    // Take $amt from this account, if available.
-    //
-    // Specifically,
-    //   If amt is available in this account, withdraw
-    //   If amt is not available,
-    //      Determine if it is available, in total, from this and the linked account.
-    //      If so, take from both.
-    //      If not, throw an exception and leave account balances unmodified.
-    // 
+    /*
+     * removes money from this account
+     * 
+     * @param amt	amount to be withdrawn
+     */
     public void withdraw(double amt) throws InsufficientFundsException
     {
     	if (_balance >= amt)
@@ -74,7 +83,7 @@ public class Account implements Filterable
     	else
     	{
     		if (_link == null) throw new InsufficientFundsException("Overdraft with no linked account");
-    		if (_balance + (_link._balance - _link.getMinimum()) < amt) throw new InsufficientFundsException("Not enough funds in accounts");
+    		if (_balance + _link._balance < amt) throw new InsufficientFundsException("Not enough funds in accounts");
 	    	
     		amt -= _balance;
     		_balance = 0;
@@ -82,9 +91,10 @@ public class Account implements Filterable
     	}
     }
     
-    //
-    // Unlink the accounts in BOTH directions
-    //
+    
+    /*
+     * removes any link from this account
+     */
     public void unlink()
     {
     	if (_link == null) return;
@@ -94,15 +104,28 @@ public class Account implements Filterable
     }
     
     
+    /*
+     * gets the minimum value of this account
+     * 
+     * @return the minimum
+     */
     public double getMinimum() {
     	return 0;
     }
     
+    
+    /*
+     * (non-Javadoc)
+     * @see Filterable#accept()
+     */
     public boolean accept() {
     	return true;
     }
     
     
+    
+    
+    //provided methods
        
     @Override
     public boolean equals(Object obj)
