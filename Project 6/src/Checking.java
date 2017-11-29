@@ -14,11 +14,13 @@ public class Checking extends Account
 		super();
 	}
 	
+	
 	public Checking(String name)
 	{
 		super(name);
 	}
 
+	
 	@Override
     public boolean link(Account linkAcct)
     {
@@ -28,6 +30,13 @@ public class Checking extends Account
 		
 		return super.link(linkAcct);
     }
+	
+	
+	public boolean accept() {
+    	return _link != null;
+    }
+	
+	
 	
     @Override
     public boolean equals(Object obj)

@@ -4,7 +4,7 @@
 * <p> (Assignment)
 * <p> (Describe, in general, the code contained.)
 */
-public class Account 
+public class Account implements Filterable
 {
     protected double _balance;
     public double getBalance() { return _balance; }
@@ -14,8 +14,6 @@ public class Account
     
     protected Account _link;
     public Account getLink() { return _link; }
-    
-    protected static final double MIN_AMOUNT = 0;
 
 	//
     // TODO: Constructors and other required methods.
@@ -69,14 +67,14 @@ public class Account
     // 
     public void withdraw(double amt) throws InsufficientFundsException
     {
-    	if (_balance - getMinimum() >= amt)
+    	if (_balance >= amt)
     	{
     		_balance -= amt;
     	}
     	else
     	{
     		if (_link == null) throw new InsufficientFundsException("Overdraft with no linked account");
-    		if (_balance - getMinimum() + (_link._balance - _link.getMinimum()) < amt) throw new InsufficientFundsException("Not enough funds in accounts");
+    		if (_balance + (_link._balance - _link.getMinimum()) < amt) throw new InsufficientFundsException("Not enough funds in accounts");
 	    	
     		amt -= _balance;
     		_balance = 0;
@@ -97,10 +95,12 @@ public class Account
     
     
     public double getMinimum() {
-    	return MIN_AMOUNT;
+    	return 0;
     }
     
-    
+    public boolean accept() {
+    	return true;
+    }
     
     
        

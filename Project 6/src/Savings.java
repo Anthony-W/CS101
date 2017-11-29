@@ -5,9 +5,8 @@
 * <p> (Describe, in general, the code contained.)
 */
 public class Savings extends Account
-{
-	
-	protected static final double MIN_AMOUNT = 100;
+{	
+	static final double MIN_AMOUNT = 100;
 	
 	//
     // TODO: Constructors and other required methods.
@@ -26,28 +25,28 @@ public class Savings extends Account
 	
 	public void withdraw(double amt) throws InsufficientFundsException
 	{
-		//TODO: Problem with stack overflow
-		super.withdraw(amt);
-		if (_balance < MIN_AMOUNT)
-		{
-			if (_link == null) throw new InsufficientFundsException("Below minimum, no linked account");
-			if (_link._balance < MIN_AMOUNT - _balance) throw new InsufficientFundsException("Below minimum, not enough money in linked account");
-			
-			//_link.withdraw(MIN_AMOUNT - _balance);
-			_link._balance -= MIN_AMOUNT - _balance;
-			_balance = MIN_AMOUNT;
-		}
+		if (_balance - getMinimum() >= amt)
+    	{
+    		_balance -= amt;
+    	}
+    	else
+    	{
+    		if (_link == null) throw new InsufficientFundsException("Overdraft with no linked account");
+    		if (_balance - getMinimum() + _link._balance < amt) throw new InsufficientFundsException("Not enough funds in accounts");
+	    	
+    		amt -= (_balance - getMinimum());
+    		_balance = getMinimum();
+    		_link.withdraw(amt);
+    	}
 	}
 	
 	
-	@Override
-	public void deposit(double amt) throws LinkAccountException
+	public double getMinimum()
 	{
-    	_balance += amt;
-    	
+    	return 100;
     }
-	
 
+	
 	@Override
     public boolean link(Account linkAcct)
     {
@@ -57,6 +56,14 @@ public class Savings extends Account
 		
 		return super.link(linkAcct);
     }
+	
+	
+	public boolean accept() {
+    	return _balance >= getMinimum();
+    }
+	
+	
+	
 	
     @Override
     public boolean equals(Object obj)

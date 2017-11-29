@@ -261,8 +261,16 @@ public class AccountTester extends Tester
 		Checking c1 = new Checking();
 		Checking c2 = new Checking();
 
-		s1.link(c1);
-		s1.link(c2);
+		if (!s1.link(c1))
+		{
+			emitError("Link error; returned false when link should be successful");
+			errors++;
+		}
+		if (!s1.link(c2))
+		{
+			emitError("Link error; returned false when link should be successful");
+			errors++;
+		}
 
 		if (!s1.getLink().equals(c2))
 		{
@@ -361,7 +369,7 @@ public class AccountTester extends Tester
 		double sum = 0;
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 			sum += randValue;
 			try {
 				s.deposit(randValue);
@@ -385,7 +393,7 @@ public class AccountTester extends Tester
 		sum = 0;
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 			sum += randValue;
 			try {
 				c.deposit(randValue);
@@ -409,7 +417,7 @@ public class AccountTester extends Tester
 		sum = 0;
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (cc.getBalance() + randValue > CappedChecking.MAX_AMOUNT) break;
 
@@ -442,7 +450,7 @@ public class AccountTester extends Tester
 
 		for (int i = 0; i < 10; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			try
 			{
@@ -467,10 +475,10 @@ public class AccountTester extends Tester
 		double cSum = 0;
 		for (int i = 0; i < 100; i++)
 		{
-			int cRandValue = _rng.nextInt(1000);
+			int cRandValue = _rng.nextInt(999) + 1;
 			cSum += cRandValue;
 
-			int sRandValue = _rng.nextInt(1000);
+			int sRandValue = _rng.nextInt(999) + 1;
 			sSum += sRandValue;
 
 			try {
@@ -507,10 +515,10 @@ public class AccountTester extends Tester
 		cSum = 0;
 		for (int i = 0; i < 100; i++)
 		{
-			int cRandValue = _rng.nextInt(1000);
+			int cRandValue = _rng.nextInt(999) + 1;
 			cSum += cRandValue;
 
-			int sRandValue = _rng.nextInt(1000);
+			int sRandValue = _rng.nextInt(999) + 1;
 			sSum += sRandValue;
 
 			try {
@@ -547,8 +555,8 @@ public class AccountTester extends Tester
 		cSum = 0;
 		for (int i = 0; i < 100; i++)
 		{
-			int cRandValue = _rng.nextInt(1000);
-			int sRandValue = _rng.nextInt(1000);
+			int cRandValue = _rng.nextInt(999) + 1;
+			int sRandValue = _rng.nextInt(999) + 1;
 
 			if (c.getBalance() + cRandValue <= CappedChecking.MAX_AMOUNT)
 			{
@@ -650,7 +658,7 @@ public class AccountTester extends Tester
 
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < 0) break;
 
@@ -680,7 +688,7 @@ public class AccountTester extends Tester
 
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < 0) break;
 
@@ -710,7 +718,7 @@ public class AccountTester extends Tester
 
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < 0) break;
 
@@ -740,7 +748,7 @@ public class AccountTester extends Tester
 		try { s.deposit(balance); } catch (LinkAccountException e) { e.printStackTrace(); errors++;}
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < 0)
 			{
@@ -759,7 +767,7 @@ public class AccountTester extends Tester
 		try { s.deposit(balance); } catch (LinkAccountException e) { e.printStackTrace(); errors++;}
 		for (int i = 0; i < 20; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < Savings.MIN_AMOUNT)
 			{
@@ -776,7 +784,7 @@ public class AccountTester extends Tester
 		try { c.deposit(balance); } catch (LinkAccountException e) { e.printStackTrace(); errors++;}
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < 0)
 			{
@@ -793,7 +801,7 @@ public class AccountTester extends Tester
 		try { c.deposit(balance); } catch (LinkAccountException e) { e.printStackTrace(); errors++;}
 		for (int i = 0; i < 100; i++)
 		{
-			int randValue = _rng.nextInt(1000);
+			int randValue = _rng.nextInt(999) + 1;
 
 			if (balance - randValue < 0)
 			{

@@ -7,7 +7,7 @@
 public class CappedChecking extends Checking
 {
 	
-	protected static final double MAX_AMOUNT = 10000;
+	static final double MAX_AMOUNT = 10000;
 	//
     // TODO: Constructors and other required methods.
     //
@@ -23,7 +23,7 @@ public class CappedChecking extends Checking
     
     public void deposit(double amt) throws LinkAccountException
     {
-    	if (_balance + amt < MAX_AMOUNT)
+    	if (_balance + amt <= MAX_AMOUNT)
     	{
     		_balance += amt;
     	}
@@ -32,6 +32,7 @@ public class CappedChecking extends Checking
     		if (_link == null) throw new LinkAccountException("Overflowed, no linked account");
     		
     		amt -= (MAX_AMOUNT - _balance);
+    		_balance = MAX_AMOUNT;
     		_link.deposit(amt);
     	}
     	
