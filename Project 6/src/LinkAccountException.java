@@ -1,8 +1,8 @@
 /*
-* @author (Student Name)
-* <p> (File Name)
-* <p> (Assignment)
-* <p> (Describe, in general, the code contained.)
+* @author Anthony Wessel
+* <p> LinkAccountException.java
+* <p> Project 6
+* <p> deposit exception
 */
 public class LinkAccountException extends Exception
 {

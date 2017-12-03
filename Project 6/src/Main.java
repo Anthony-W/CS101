@@ -1,8 +1,8 @@
 /*
-* @author (Student Name)
-* <p> (File Name)
-* <p> (Assignment)
-* <p> (Describe, in general, the code contained.)
+* @author Anthony Wessel
+* <p> Main.java
+* <p> Project 6
+* <p> runs the testing classes
 */
 public class Main
 {

@@ -47,12 +47,16 @@ public class Account implements Filterable
 	 */
 	public boolean link(Account linkAcct)
 	{
-		if (linkAcct == null)
-			return false;
-		if (this == linkAcct)
-			return false;
+		//check for null parameter
+		if (linkAcct == null) return false;
+		
+		//check if linkAcct is this account
+		if (this == linkAcct) return false;
 
+		//undo any previous link
 		unlink();
+		
+		//link accounts
 		_link = linkAcct;
 		linkAcct._link = this;
 		return true;
@@ -75,16 +79,24 @@ public class Account implements Filterable
 	 */
 	public void withdraw(double amt) throws InsufficientFundsException
 	{
+		//check if there is enough money in this account to withdraw
 		if (_balance >= amt)
 		{
 			_balance -= amt;
-		} else
+		}
+		
+		//not enough money in this account
+		else
 		{
+			//check if this account has a linked account
 			if (_link == null)
 				throw new InsufficientFundsException("Overdraft with no linked account");
+			
+			//check if there is enough money in this account and its linked account combined
 			if (_balance + _link._balance < amt)
 				throw new InsufficientFundsException("Not enough funds in accounts");
 
+			//withdraw
 			amt -= _balance;
 			_balance = 0;
 			_link.withdraw(amt);
@@ -96,9 +108,11 @@ public class Account implements Filterable
 	 */
 	public void unlink()
 	{
+		//dont do anything if this account is not linked
 		if (_link == null)
 			return;
 
+		//unlink
 		_link._link = null;
 		_link = null;
 	}

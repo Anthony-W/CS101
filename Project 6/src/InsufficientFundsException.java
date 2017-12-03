@@ -1,8 +1,8 @@
 /*
-* @author (Student Name)
-* <p> (File Name)
-* <p> (Assignment)
-* <p> (Describe, in general, the code contained.)
+* @author Anthony Wessel
+* <p> InsufficientFundsException.java
+* <p> Project 6
+* <p> withdrawal exception
 */
 public class InsufficientFundsException extends Exception
 {

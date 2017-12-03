@@ -86,12 +86,10 @@ public class Savings extends Account
 	public boolean link(Account linkAcct)
 	{
 		//check for null parameter
-		if (linkAcct == null)
-			return false;
+		if (linkAcct == null) return false;
 
 		//check if linkAcct is another Savings account
-		if (linkAcct instanceof Savings)
-			return false;
+		if (linkAcct instanceof Savings) return false;
 
 		return super.link(linkAcct);
 	}
